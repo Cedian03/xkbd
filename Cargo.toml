@@ -8,4 +8,3 @@ edition = "2021"
 [dependencies]
 embedded-hal = "1.0.0"
 usb-device = "0.3.2"
-usbd-hid = "0.7.0"

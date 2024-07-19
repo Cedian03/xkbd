@@ -1,3 +1,6 @@
-pub use crate::key_map::KeyMap;
-pub use crate::key_report::KeyReport;
-pub use crate::key_scan::{KeyScan, COL2ROW, ROW2COL};
+pub use crate::{
+    key_class::KeyClass,
+    key_map::KeyMap,
+    key_report::KeyReport,
+    key_scan::{COL2ROW, ROW2COL, KeyScan},
+};
