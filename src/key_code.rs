@@ -1,8 +1,9 @@
 /// <https://www.usb.org/sites/default/files/documents/hut1_12v2.pdf>
 #[repr(u8)]
-#[derive(Clone, Copy, Debug, PartialEq, PartialOrd)]
+#[derive(Clone, Copy, Debug, Default, PartialEq, PartialOrd)]
 pub enum KeyCode {
     /// No event indicated.
+    #[default]
     None = 0x00,
     /// Roll-over error.
     RollOverError = 0x01,
@@ -203,72 +204,138 @@ pub enum KeyCode {
     KeypadDot = 0x63,
     /// Keyboard non-US `\` and `|`.
     NonUSBackslash = 0x64,
-    // Application = 0x65,
-    // Power = 0x66,
-    // KeypadEqual = 0x67,
-    // F13 = 0x68,
-    // F14 = 0x69,
-    // F15 = 0x6A,
-    // F16 = 0x6B,
-    // F17 = 0x6C,
-    // F18 = 0x6D,
-    // F19 = 0x6E,
-    // F20 = 0x6F,
-    // F21 = 0x70,
-    // F22 = 0x71,
-    // F23 = 0x72,
-    // F24 = 0x73,
-    // Execute = 0x74,
-    // Help = 0x75,
-    // Menu = 0x76,
-    // Select = 0x77,
-    // Stop = 0x78,
-    // Again = 0x79,
-    // Undo = 0x7A,
-    // Cut = 0x7B,
-    // Copy = 0x7C,
-    // Paste = 0x7D,
-    // Find = 0x7E,
-    // Mute = 0x7F,
-    // VolumeUp = 0x80,
-    // VolumeDown = 0x81,
-    // LockingCapsLock = 0x82,
-    // LockingNumLock = 0x83,
-    // LockingScrollLock = 0x84,
-    // KeypadComma = 0x85,
-    // KeypadEqualSign = 0x86,
-    // International1 = 0x87,
-    // International2 = 0x88,
-    // International3 = 0x89,
-    // International4 = 0x8A,
-    // International5 = 0x8B,
-    // International6 = 0x8C,
-    // International7 = 0x8D,
-    // International8 = 0x8E,
-    // International9 = 0x8F,
-    // Language1 = 0x90,
-    // Language2 = 0x91,
-    // Language3 = 0x92,
-    // Language4 = 0x93,
-    // Language5 = 0x94,
-    // Language6 = 0x95,
-    // Language7 = 0x96,
-    // Language8 = 0x97,
-    // Language9 = 0x98,
-    // AlternateErase = 0x99,
-    // SysReqAttention = 0x9A,
-    // Cancel = 0x9B,
-    // Clear = 0x9C,
-    // Prior = 0x9D,
-    // Return = 0x9E,
-    // Separator = 0x9F,
-    // Out = 0xA0,
-    // Oper = 0xA1,
-    // ClearAgain = 0xA2,
-    // CrSelProps = 0xA3,
-    // ExSel = 0xA4,
+    /// Keyboard `Application`.
+    Application = 0x65,
+    /// Keyboard `Power`.
+    Power = 0x66,
+    /// Keyboard `=`.
+    KeypadEqual = 0x67,
+    /// Keyboard `F13`.
+    F13 = 0x68,
+    /// Keyboard `F14`.
+    F14 = 0x69,
+    /// Keyboard `F15`.
+    F15 = 0x6A,
+    /// Keyboard `F16`.
+    F16 = 0x6B,
+    /// Keyboard `F17`.
+    F17 = 0x6C,
+    /// Keyboard `F18`.
+    F18 = 0x6D,
+    /// Keyboard `F19`.
+    F19 = 0x6E,
+    /// Keyboard `F20`.
+    F20 = 0x6F,
+    /// Keyboard `F21`.
+    F21 = 0x70,
+    /// Keyboard `F22`.
+    F22 = 0x71,
+    /// Keyboard `F23`.
+    F23 = 0x72,
+    /// Keyboard `F24`.
+    F24 = 0x73,
+    /// Keyboard `Execute`.
+    Execute = 0x74,
+    /// Keyboard `Help`.
+    Help = 0x75,
+    /// Keyboard `Menu`.
+    Menu = 0x76,
+    /// Keyboard `Select`.
+    Select = 0x77,
+    /// Keyboard `Stop`.
+    Stop = 0x78,
+    /// Keyboard `Again`.
+    Again = 0x79,
+    /// Keyboard `Undo`.
+    Undo = 0x7A,
+    /// Keyboard `Cut`.
+    Cut = 0x7B,
+    /// Keyboard `Copy`.
+    Copy = 0x7C,
+    /// Keyboard `Paste`.
+    Paste = 0x7D,
+    /// Keyboard `Find`.
+    Find = 0x7E,
+    /// Keyboard `Mute`.
+    Mute = 0x7F,
+    /// Keyboard `Volume Up`.
+    VolumeUp = 0x80,
+    /// Keyboard `Volume Down`.
+    VolumeDown = 0x81,
+    /// Keyboard `Locking Caps Lock`.
+    LockingCapsLock = 0x82,
+    /// Keyboard `Locking Num Lock`.
+    LockingNumLock = 0x83,
+    /// Keyboard `Locking Scroll Lock`.
+    LockingScrollLock = 0x84,
+    /// Keypad `,`.
+    KeypadComma = 0x85,
+    /// Keypad `=`.
+    KeypadEqualSign = 0x86,
+    /// Keyboard `International 1`.
+    International1 = 0x87,
+    /// Keyboard `International 2`.
+    International2 = 0x88,
+    /// Keyboard `International 3`.
+    International3 = 0x89,
+    /// Keyboard `International 4`.
+    International4 = 0x8A,
+    /// Keyboard `International 5`.
+    International5 = 0x8B,
+    /// Keyboard `International 6`.
+    International6 = 0x8C,
+    /// Keyboard `International 7`.
+    International7 = 0x8D,
+    /// Keyboard `International 8`.
+    International8 = 0x8E,
+    /// Keyboard `International 9`.
+    International9 = 0x8F,
+    /// Keyboard `Language 1`.
+    Language1 = 0x90,
+    /// Keyboard `Language 2`.
+    Language2 = 0x91,
+    /// Keyboard `Language 3`.
+    Language3 = 0x92,
+    /// Keyboard `Language 4`.
+    Language4 = 0x93,
+    /// Keyboard `Language 5`.
+    Language5 = 0x94,
+    /// Keyboard `Language 6`.
+    Language6 = 0x95,
+    /// Keyboard `Language 7`.
+    Language7 = 0x96,
+    /// Keyboard `Language 8`.
+    Language8 = 0x97,
+    /// Keyboard `Language 9`.
+    Language9 = 0x98,
+    /// Keyboard `Alternate Erase`. 
+    AlternateErase = 0x99,
+    /// Keyboard `SysReq/Attention`. 
+    SysReqAttention = 0x9A,
+    /// Keyboard `Cancel`. 
+    Cancel = 0x9B,
+    /// Keyboard `Clear`. 
+    Clear = 0x9C,
+    /// Keyboard `Prior`. 
+    Prior = 0x9D,
+    /// Keyboard `Return`. 
+    Return = 0x9E,
+    /// Keyboard `Separator`. 
+    Separator = 0x9F,
+    /// Keyboard `Out`. 
+    Out = 0xA0,
+    /// Keyboard `Oper`. 
+    Oper = 0xA1,
+    /// Keyboard `Clear/Again`. 
+    ClearAgain = 0xA2,
+    /// Keyboard `CrSel/Props`. 
+    CrSelProps = 0xA3,
+    /// Keyboard `ExSel`. 
+    ExSel = 0xA4,
 
-    // 0xA5-0xE0 Reserved
+    // 0xA5-0xAF Reserved
+
+    // TODO: Add missing key codes.
     
     /// Keyboard `Left Control`.
     LeftControl = 0xE0,

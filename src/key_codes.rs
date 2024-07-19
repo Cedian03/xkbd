@@ -92,12 +92,26 @@ define_keys!(
     KC_LEFT; "Keyboard `Left Arrow`" => LeftArrow,
     KC_DOWN; "Keyboard `Down Arrow`" => DownArrow,
     KC_UP; "Keyboard `Up Arrow`" => UpArrow,
-
-    // TODO: Keypad key codes.
-
+    KC_KP_NUM_LOCK KC_KP_NUM; "Keypad `Num Lock`." => KeypadNumLock,
+    KC_KP_DIVIDE KC_KP_DIV; "Keypad `/`." => KeypadDivide,
+    KC_KP_MULTIPLY KC_KP_MUL; "Keypad `*`." => KeypadMultiply,
+    KC_KP_SUBTRACT KC_KP_SUB; "Keypad `-`." => KeypadSubtract,
+    KC_KP_ADD; "Keypad `+`." => KeypadAdd,
+    KC_KP_ENTER KC_KP_ENT; "Keypad `Enter`." => KeypadEnter,
+    KC_KP_1; "Keypad `1` and `End`." => Keypad1,
+    KC_KP_2; "Keypad `2` and `Down Arrow`." => Keypad2,
+    KC_KP_3; "Keypad `3` and `Page Down`." => Keypad3,
+    KC_KP_4; "Keypad `4` and `Left Arrow`." => Keypad4,
+    KC_KP_5; "Keypad `5`." => Keypad5,
+    KC_KP_6; "Keypad `6` and `Right Arrow`." => Keypad6,
+    KC_KP_7; "Keypad `7` and `Home`." => Keypad7,
+    KC_KP_8; "Keypad `8` and `Up Arrow`." => Keypad8,
+    KC_KP_9; "Keypad `9` and `Page Up`." => Keypad9,
+    KC_KP_0; "Keypad `0` and `Insert`." => Keypad0,
+    KC_KP_DOT; "Keypad `.` and `Delete`." => KeypadDot,
     KC_NON_US_BACKSLASH KC_NUBS; "Keyboard non-US `\\` and `|`" => NonUSBackslash,
 
-    // TODO: Misc keys.
+    // TODO: Add missing key codes.
 
     KC_LEFT_CONTROL KC_LCTL; "Keyboard `Left Control`." => LeftControl,
     KC_LEFT_SHIFT KC_LSFT; "Keyboard `Left Shift`." => LeftShift,
