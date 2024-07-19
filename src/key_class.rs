@@ -20,7 +20,7 @@ const DESCRIPTOR_HID: &[u8] = &[
     lsb(DESCRIPTOR_REPORT.len() as u16),
     msb(DESCRIPTOR_REPORT.len() as u16),
 ];
-    
+   
 const DESCRIPTOR_TYPE_REPORT: u8 = 0x22;
 const DESCRIPTOR_REPORT: &[u8] = &[
     0x05, 0x01,  // Usage Page (Generic Desktop)
@@ -102,7 +102,21 @@ impl<B: UsbBus> UsbClass<B> for KeyClass<'_, B> {
         match (req.request_type, req.request) {
             (control::RequestType::Standard, control::Request::GET_DESCRIPTOR) => {
                 match msb(req.value) {
-                    // TODO: Accept DESCRIPTOR_TYPE_HID.
+                    DESCRIPTOR_TYPE_HID => {
+                        let desc: [u8; DESCRIPTOR_HID.len() + 2] = [
+                            DESCRIPTOR_HID.len() as u8 + 2, // Length of the entire descriptor
+                            DESCRIPTOR_TYPE_HID,
+                            DESCRIPTOR_HID[0],
+                            DESCRIPTOR_HID[1],
+                            DESCRIPTOR_HID[2],
+                            DESCRIPTOR_HID[3],
+                            DESCRIPTOR_HID[4],
+                            DESCRIPTOR_HID[5],
+                            DESCRIPTOR_HID[6],
+                        ];
+
+                        xfer.accept_with(&desc).ok();
+                    }
                     DESCRIPTOR_TYPE_REPORT => {
                         xfer.accept_with_static(DESCRIPTOR_REPORT).ok(); // TODO: Error handling.
                     }
