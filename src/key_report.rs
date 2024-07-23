@@ -1,9 +1,10 @@
+use crate::key_action::KeyAction;
 use crate::key_code::KeyCode;
 use crate::key_map::KeyMap;
 
 pub const REPORT_SIZE: usize = 8;
 
-#[derive(Clone, Copy, Debug, Default, PartialEq)]
+#[derive(Clone, Copy, Debug, PartialEq)]
 pub struct KeyReport {
     modifiers: u8,
     codes: [KeyCode; 6]
@@ -12,7 +13,7 @@ pub struct KeyReport {
 impl KeyReport {
     pub fn build<const W: usize, const H: usize>(scan: &[[bool; W]; H], map: &KeyMap<W, H>) -> Self {
         let mut modifiers = 0;
-        let mut codes = [KeyCode::None; 6];
+        let mut codes = [KeyCode::NoEvent; 6];
         let mut count = 0;
     
         'outer: for y in 0..H {
@@ -21,9 +22,12 @@ impl KeyReport {
                     continue;
                 }
     
-                let code = map.get(x, y);
-    
-                if code.is_none() {
+                let code = match map.get(x, y) {
+                    KeyAction::Key(Some(code)) => code,
+                    KeyAction::Key(None) => KeyCode::NoEvent,
+                };
+
+                if !code.is_any() {
                     continue;
                 }
 
@@ -59,6 +63,15 @@ impl KeyReport {
     }
 
     pub fn is_empty(&self) -> bool {
-        self.modifiers == 0 && self.codes.iter().all(|x| *x == KeyCode::None) 
+        self.modifiers == 0 && self.codes.iter().all(|x| x.is_any()) 
+    }
+}
+
+impl Default for KeyReport {
+    fn default() -> Self {
+        Self {
+            modifiers: 0,
+            codes: [KeyCode::NoEvent; 6]
+        }
     }
 }

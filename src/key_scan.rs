@@ -1,4 +1,6 @@
 use core::convert::Infallible;
+extern crate alloc;
+use alloc::boxed::Box;
 
 use embedded_hal::{
     delay::DelayNs,
@@ -14,8 +16,8 @@ pub struct KeyScan<T>(T);
 
 impl KeyScan<COL2ROW> {
     pub fn scan<const W: usize, const H: usize>(
-        rows: &mut [&mut dyn InputPin<Error = Infallible>; H],
-        cols: &mut [&mut dyn OutputPin<Error = Infallible>; W],
+        rows: &mut [Box<dyn InputPin<Error = Infallible>>; H],
+        cols: &mut [Box<dyn OutputPin<Error = Infallible>>; W],
         delay: &mut impl DelayNs,
     ) -> [[bool; W]; H] {
         let mut matrix = [[false; W]; H];

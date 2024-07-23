@@ -1,18 +1,22 @@
+use crate::key_action::KeyAction;
 use crate::key_code::KeyCode;
 
-macro_rules! define_keys {
+/// Transparent.
+pub const _______: KeyAction = KeyAction::Key(None); 
+
+macro_rules! define_basic_keys {
     ($($($key:ident)+; $doc:expr => $code:ident),* $(,)?) => {
         $(
             $(
                 #[doc = $doc]
-                pub const $key: KeyCode = KeyCode::$code;
+                pub const $key: KeyAction = KeyAction::Key(Some(KeyCode::$code));
             )+
         )*
     };
 }
 
-define_keys!(
-    KC_NONE XXXXXXX; "None." => None,
+define_basic_keys!(
+    KC_NONE XXXXXXX; "None." => NoEvent,
     KC_A; "Keyboard `a` and `A`." => KeyboardA,
     KC_B; "Keyboard `b` and `B`." => KeyboardB,
     KC_C; "Keyboard `c` and `C`." => KeyboardC,

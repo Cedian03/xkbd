@@ -2,6 +2,7 @@
 
 pub mod prelude;
 
+pub mod key_action;
 pub mod key_class;
 pub mod key_code;
 pub mod key_codes;

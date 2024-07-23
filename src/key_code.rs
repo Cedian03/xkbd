@@ -1,10 +1,9 @@
 /// <https://www.usb.org/sites/default/files/documents/hut1_12v2.pdf>
 #[repr(u8)]
-#[derive(Clone, Copy, Debug, Default, PartialEq, PartialOrd)]
+#[derive(Clone, Copy, Debug, PartialEq, PartialOrd)]
 pub enum KeyCode {
     /// No event indicated.
-    #[default]
-    None = 0x00,
+    NoEvent = 0x00,
     /// Roll-over error.
     RollOverError = 0x01,
     // POSTFail = 0x02,
@@ -366,8 +365,8 @@ impl KeyCode {
         (Self::LeftControl..=Self::RightGUI).contains(self)
     }
 
-    pub fn is_none(&self) -> bool {
-        *self == Self::None
+    pub fn is_any(&self) -> bool {
+        *self != Self::NoEvent
     }
 
     pub fn modifier_index(&self) -> Option<u8> {
